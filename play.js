@@ -48,7 +48,7 @@ const scoreText = document.querySelector('#scorenumber');
 const progressBarFull = document.querySelector('#progressBarFull');
 const SCORE_POINTS = 25
 const MAX_QUESTIONS = 4 
-GetStareted = () => {
+GetStarted = () => {
 	questionCounter = 0
     score = 0
     availableQuestions = [...questions]
@@ -98,7 +98,7 @@ incrementScore = number  => {
 	score +=number
  scoreText.innerText = score
 }
-GetStareted()
+GetStarted()
 
 
 
