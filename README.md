@@ -44,7 +44,7 @@ Just download everything and open `play.html` in your favorite browser.
 Feel free to grab a copy, modify it, or add new questions. I'm open to collaboration!
 
 ## Reach Out
-Questions or ideas? Hit me up on [Twitter](https://twitter.com/russ-rich) 
+Questions or ideas? Hit me up on [Twitter](https://twitter.com/russ_rich) 
 ---
 
 Enjoy the quiz, and have a blast!
