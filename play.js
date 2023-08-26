@@ -1,5 +1,5 @@
 let questions = [
-{question: 'What is the worl\'ds most populated country?',
+{question: 'What is the world\'s most populated country?',
 choice1: 'United States',
 choice2: 'China',
 choice3: 'Russia',
