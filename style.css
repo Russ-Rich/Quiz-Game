@@ -13,7 +13,6 @@ h1{
  color: green;
  margin:0;
  padding:0;
- text-shadow: -2px 4px #fff, 2px 8px #fff;
 }
 
 a:link, a:visited {
@@ -51,7 +50,6 @@ a:hover, a:active {
 		word-spacing: 2px;
 		text-transform: uppercase;
 		text-decoration: none;
-		text-shadow: 2px 4px #fff, 2px 8px #fff;
 		background-image: linear-gradient(to right bottom, #ffc0cb 0%, #ffffcc 100%
 		);
 		background-size: cover;
@@ -244,7 +242,7 @@ margin:0;
 		margin: 0 auto;
 		font-size: 1.5rem;
 		font-weight: bold;
-		
+
 
 
 }
