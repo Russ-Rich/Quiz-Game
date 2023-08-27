@@ -1,57 +1,56 @@
-const mostRecentScore = localStorage.getItem('mostRecentScore')
-const finalScore = document.querySelector('#finalScore')
-const username = document.querySelector('#username')
-const scoreBtn = document.querySelector('#scoreBtn')
-const highScores = JSON.parse(localStorage.getItem('highScores')) || []
-finalScore.innerText = mostRecentScore
-console.log(finalScore.innerText)
-username.addEventListener('keyup', () => {
-    scoreBtn.disabled = !username.value
-})
-const score = {
-        score: mostRecentScore,
-        name: username.value
-    }
-console.log(highScores)
-saveHighScore = e => {
-    e.preventDefault()
+document.addEventListener("DOMContentLoaded", () => {
+	const finalScoreElem = document.getElementById("finalScore");
+	const usernameElem = document.getElementById("username");
+	const scoreBtnElem = document.getElementById("scoreBtn");
+	const finalMessageElem = document.getElementById("finalMessage");
 
-    const score = {
-        score: mostRecentScore,
-        name: username.value
-    }
-  highScores.push(score)
+	let highScores = getHighScores();
+	let mostRecentScore = localStorage.getItem("mostRecentScore");
 
-    highScores.reverse()
-    highScores.splice(4)
-    localStorage.setItem('highScores', JSON.stringify(highScores))
-    console.log(highScores)
-    window.location.assign('achievers.html')
+	init();
 
-}
+	function init() {
+		finalScoreElem.innerText = mostRecentScore;
+		usernameElem.addEventListener("keyup", handleUsernameChange);
+		scoreBtnElem.addEventListener("click", saveHighScore);
+	}
 
-if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
-	localStorage.setItem("mostRecentScore", score);
+	function getHighScores() {
+		return JSON.parse(localStorage.getItem("highScores")) || [];
+	}
+
+	function handleUsernameChange() {
+		scoreBtnElem.disabled = !usernameElem.value;
+	}
+
+	function saveHighScore(event) {
+		event.preventDefault();
+
+		const score = {
+			score: mostRecentScore,
+			name: usernameElem.value,
+		};
+
+		highScores.push(score);
+		highScores.sort((a, b) => b.score - a.score);
+		highScores.splice(5);
+
+		localStorage.setItem("highScores", JSON.stringify(highScores));
+		window.location.assign("achievers.html");
+	}
+
+	if (!mostRecentScore) return;
 
 	let finalMessage;
-	if (score <= 25) {
+	if (mostRecentScore <= 25) {
 		finalMessage = "Hey, better luck next time!";
-	} else if (score > 25 && score <= 50) {
+	} else if (mostRecentScore <= 50) {
 		finalMessage = "Not bad, you're getting there!";
-	} else if (score > 50 && score <= 75) {
+	} else if (mostRecentScore <= 75) {
 		finalMessage = "Nice, you're pretty smart!";
 	} else {
 		finalMessage = "Wow, you're a quiz genius!";
 	}
 
-	
-	document.getElementById("finalMessage").innerText = finalMessage;
-
-	return window.location.assign("score.html");
-}
-
-window.onload = function () {
-	const mostRecentScore = localStorage.getItem("mostRecentScore");
-	document.getElementById("finalScore").innerText = mostRecentScore;
-};
-
+	finalMessageElem.innerText = finalMessage;
+});

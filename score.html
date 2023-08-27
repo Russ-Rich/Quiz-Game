@@ -1,27 +1,33 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-    <title>score</title>
+    <title>Score Page</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
-    <div class="container">
-        <div>
-            <h2>Your Score: <span id="finalScore"></span></h2>
-    <p id="finalMessage"></p>
-            <form>
-                <h2 id="end-text">Enter your name</h2>
-                <input type="text" name="name" id="username" placeholder="Enter your name">
-                <button class="btn" id="scoreBtn" type="submit" onclick="saveHighScore(event)" disabled>Save</button>
+    <main class="container">
+        <section class="score-section">
+            <h2 class="score-title">
+                Your Score: <span id="finalScore"></span>
+            </h2>
+            <p id="finalMessage" class="final-message"></p>
+            
+            <form id="scoreForm">
+                <label for="username" class="username-label">Enter your name:</label>
+                <input type="text" id="username" name="username" placeholder="Your name here">
+                
+                <button id="scoreBtn" class="btn" type="submit" disabled>Save</button>
             </form>
-            <a href="play.html" class="btn">Want To Play Again?</a>
-            <a href="index.html" class="btn">Go Home</a>
-        </div>
-    </div>
+            
+            <div class="action-links">
+                <a href="play.html" class="btn">Want To Play Again?</a>
+                <a href="index.html" class="btn">Go Home</a>
+            </div>
+        </section>
+    </main>
+    
     <script src="score.js"></script>
 </body>
 </html>
