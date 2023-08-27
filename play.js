@@ -1,24 +1,18 @@
-// Array of background images
 const backgrounds = [
 	"/images/globe-7510104_960_720",
 	"/images/passport-2714675_960_720",
-	"/images/vintage-4896141_960_720",
 	"/images/phone-1869510_960_720",
 	"/images/vintage-2792545_960_720.jpg",
-	// Add more URLs here
+	"/images/vintage-4896141_960_720"
+
 ];
-
-// Function to change background image
 const changeBackground = () => {
-	// Get a random number based on the number of backgrounds we have
 	const random = Math.floor(Math.random() * backgrounds.length);
-	// Change the background image
 	document.body.style.backgroundImage = `url(${backgrounds[random]})`;
+	
 };
-// Call function when page loads
+
 changeBackground();
-
-
 
 let questions = [
 	{
@@ -63,18 +57,19 @@ let questions = [
 	},
 ];
 let currentQuestion = {};
-let TrueAnswers = true;
+let acceptingAnswers = true;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
-const question = document.querySelector("#QuestionText");
+const question = document.getElementById("QuestionText");
 const choices = Array.from(document.querySelectorAll(".ChoiceText"));
-const progressText = document.querySelector("#progressText");
-const scoreText = document.querySelector("#scorenumber");
-const progressBarFull = document.querySelector("#progressBarFull");
+const progressText = document.getElementById("progressText");
+const scoreText = document.getElementById("scorenumber");
+const progressBarFull = document.getElementById("progressBarFull");
 const SCORE_POINTS = 25;
 const MAX_QUESTIONS = 4;
-GetStarted = () => {
+
+startGame = () => {
 	questionCounter = 0;
 	score = 0;
 	availableQuestions = [...questions];
@@ -82,35 +77,31 @@ GetStarted = () => {
 };
 
 getNewQuestion = () => {
-	if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+	if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
 		localStorage.setItem("mostRecentScore", score);
-		
-		
-
 		return window.location.assign("score.html");
-		changeBackground();
-	} else {
-		changeBackground();
 	}
 
+	changeBackground();
+	
 	questionCounter++;
 	progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
 	progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
-	const questionsRandNumber = Math.floor(Math.random() * availableQuestions.length);
-	currentQuestion = availableQuestions[questionsRandNumber];
+	const questionsIndex = Math.floor(Math.random() * availableQuestions.length);
+	currentQuestion = availableQuestions[questionsIndex];
 	question.innerText = currentQuestion.question;
 	choices.forEach((choice) => {
 		const number = choice.dataset["number"];
 		choice.innerText = currentQuestion["choice" + number];
 	});
-	availableQuestions.splice(questionsRandNumber, 1);
-
-	TrueAnswers = true;
+	availableQuestions.splice(questionsIndex, 1);
+	acceptingAnswers = true;
 };
+
 choices.forEach((choice) => {
 	choice.addEventListener("click", (e) => {
-		if (!TrueAnswers) return;
-		TrueAnswers = false;
+		if (!acceptingAnswers) return;
+		acceptingAnswers = false;
 		const selectedChoice = e.target;
 		const selectedAnswer = selectedChoice.dataset["number"];
 		let classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
@@ -125,21 +116,9 @@ choices.forEach((choice) => {
 	});
 });
 
-incrementScore = (number) => {
-	score += number;
+incrementScore = (num) => {
+	score += num;
 	scoreText.innerText = score;
 };
-GetStarted();
 
-let classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-
-if (classToApply === "correct") {
-	incrementScore(SCORE_POINTS);
-	selectedChoice.classList.add("correct-text"); // This line is new
-}
-
-setTimeout(() => {
-	selectedChoice.classList.remove("correct-text"); // This line is new
-	getNewQuestion();
-}, 1000);
-
+startGame();

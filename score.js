@@ -1,56 +1,43 @@
+// Wait until the document is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
+	// Declare and initialize DOM elements
 	const finalScoreElem = document.getElementById("finalScore");
-	const usernameElem = document.getElementById("username");
-	const scoreBtnElem = document.getElementById("scoreBtn");
 	const finalMessageElem = document.getElementById("finalMessage");
 
-	let highScores = getHighScores();
-	let mostRecentScore = localStorage.getItem("mostRecentScore");
+	// Retrieve the most recent score from localStorage
+	const mostRecentScore = localStorage.getItem("mostRecentScore");
 
-	init();
-
-	function init() {
-		finalScoreElem.innerText = mostRecentScore;
-		usernameElem.addEventListener("keyup", handleUsernameChange);
-		scoreBtnElem.addEventListener("click", saveHighScore);
-	}
-
-	function getHighScores() {
-		return JSON.parse(localStorage.getItem("highScores")) || [];
-	}
-
-	function handleUsernameChange() {
-		scoreBtnElem.disabled = !usernameElem.value;
-	}
-
-	function saveHighScore(event) {
-		event.preventDefault();
-
-		const score = {
-			score: mostRecentScore,
-			name: usernameElem.value,
-		};
-
-		highScores.push(score);
-		highScores.sort((a, b) => b.score - a.score);
-		highScores.splice(5);
-
-		localStorage.setItem("highScores", JSON.stringify(highScores));
-		window.location.assign("achievers.html");
-	}
-
+	// Early exit if no recent score found
 	if (!mostRecentScore) return;
 
-	let finalMessage;
-	if (mostRecentScore <= 25) {
-		finalMessage = "Hey, better luck next time!";
-	} else if (mostRecentScore <= 50) {
-		finalMessage = "Not bad, you're getting there!";
-	} else if (mostRecentScore <= 75) {
-		finalMessage = "Nice, you're pretty smart!";
-	} else {
-		finalMessage = "Wow, you're a quiz genius!";
+	// Initialize the UI
+	init();
+
+	// Initialization function
+	function init() {
+		// Set the final score
+		finalScoreElem.innerText = mostRecentScore;
+
+		// Update the final message based on the score
+		updateFinalMessage();
 	}
 
-	finalMessageElem.innerText = finalMessage;
+	// Function to update the final message based on the score
+	function updateFinalMessage() {
+		let finalMessage;
+
+		// Determine message based on score range
+		if (mostRecentScore <= 25) {
+			finalMessage = "You must've gone to Wharton, huh?";
+		} else if (mostRecentScore <= 50) {
+			finalMessage = "Ah, a solid B- effort. You Harvard yet?";
+		} else if (mostRecentScore <= 75) {
+			finalMessage = "Nice, Yale material... but not quite top of the class!";
+		} else {
+			finalMessage = "MIT called. They want their genius back!";
+		}
+
+		// Update the DOM
+		finalMessageElem.innerText = finalMessage;
+	}
 });
