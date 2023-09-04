@@ -3,13 +3,12 @@ const backgrounds = [
 	"/images/passport-2714675_960_720",
 	"/images/phone-1869510_960_720",
 	"/images/vintage-2792545_960_720.jpg",
-	"/images/vintage-4896141_960_720"
-
+	"/images/vintage-4896141_960_720",
+	"/images/plane0.jpg",
 ];
 const changeBackground = () => {
 	const random = Math.floor(Math.random() * backgrounds.length);
 	document.body.style.backgroundImage = `url(${backgrounds[random]})`;
-	
 };
 
 changeBackground();
@@ -83,7 +82,7 @@ getNewQuestion = () => {
 	}
 
 	changeBackground();
-	
+
 	questionCounter++;
 	progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
 	progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
