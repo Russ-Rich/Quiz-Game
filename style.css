@@ -21,6 +21,12 @@ body.score {
 	background-repeat: no-repeat;
 }
 
+body.play {
+	background-image: url("images/colormap.jpeg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
 /* Container */
 .container,
 .ques_container {
