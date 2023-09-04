@@ -1,10 +1,10 @@
 const backgrounds = [
-	"/images/globe-7510104_960_720",
-	"/images/passport-2714675_960_720",
-	"/images/phone-1869510_960_720",
-	"/images/vintage-2792545_960_720.jpg",
-	"/images/vintage-4896141_960_720",
-	"/images/plane0.jpg",
+	"images/globe-7510104_960_720",
+	"images/passport-2714675_960_720",
+	"images/phone-1869510_960_720",
+	"images/vintage-2792545_960_720.jpg",
+	"images/vintage-4896141_960_720",
+	"images/plane0.jpg",
 ];
 const changeBackground = () => {
 	const random = Math.floor(Math.random() * backgrounds.length);
