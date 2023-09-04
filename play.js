@@ -22,7 +22,7 @@ let questions = [
 		choice4: "India",
 		choice5: "Egypt",
 		choice6: "Germany",
-		answer: 2,
+		answer: 1,
 	},
 	{
 		question: "What is the capital of the Philippines?",
